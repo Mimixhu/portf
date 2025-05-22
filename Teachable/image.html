@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>WYI: Whats Ur Item?</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Left side: Title and buttons -->
+      <div class="left-panel">
+        <h1>Teachable Machine Image Model</h1>
+        <h4>Mielle Angelie B. Dulce <br>
+            Lyceum of the Philippines University, Cavite Campus <br>
+            BSCS301<br>
+            CSELC03C
+        </h4>
+        <button type="button" onclick="init()">Start</button>
+        <button type="button" id="stop-btn" onclick="stopWebcam()" disabled>Stop</button>
+      </div>
+
+      <!-- Right side: Webcam & labels -->
+      <div class="right-panel">
+        <div id="webcam-container"></div>
+        <div id="label-container"></div>
+      </div>
+    </div>
+
+    <!-- TensorFlow.js and Teachable Machine scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+
+    <script>
+      const URL = "./my_model/";
+      let model, webcam, labelContainer, maxPredictions, isRunning = false;
+
+      async function init() {
+        if (isRunning) return;
+        isRunning = true;
+
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
+
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+
+        webcam = new tmImage.Webcam(400, 400, true);
+        await webcam.setup();
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+
+        document.getElementById("webcam-container").innerHTML = "";
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+
+        labelContainer = document.getElementById("label-container");
+        labelContainer.innerHTML = "";
+        for (let i = 0; i < maxPredictions; i++) {
+          const labelItem = document.createElement("div");
+          labelItem.className = "label-item";
+          const labelText = document.createElement("div");
+          labelText.className = "label-text";
+          labelText.innerHTML = "";
+          const progressBar = document.createElement("div");
+          progressBar.className = "progress-bar";
+          const progress = document.createElement("div");
+          progress.className = "progress";
+          progressBar.appendChild(progress);
+          labelItem.appendChild(labelText);
+          labelItem.appendChild(progressBar);
+          labelContainer.appendChild(labelItem);
+        }
+
+        document.getElementById("stop-btn").disabled = false;
+      }
+
+      async function loop() {
+        if (!isRunning) return;
+        webcam.update();
+        await predict();
+        window.requestAnimationFrame(loop);
+      }
+
+      async function predict() {
+        const prediction = await model.predict(webcam.canvas);
+        for (let i = 0; i < maxPredictions; i++) {
+          const prob = prediction[i].probability;
+          const percentText = (prob * 100).toFixed(2) + "%";
+          const labelItem = labelContainer.children[i];
+          labelItem.querySelector(".label-text").innerHTML = prediction[i].className + ": " + percentText;
+          labelItem.querySelector(".progress").style.width = percentText;
+        }
+      }
+
+      function stopWebcam() {
+        if (webcam) {
+          webcam.stop();
+          isRunning = false;
+          document.getElementById("stop-btn").disabled = true;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lord of the Mysteries - The Fool</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #111;
+            color: rgb(200, 180, 180);
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+        .side-image {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .welcome-container {
+            text-align: center;
+            border: 5px solid rgb(67, 64, 64);
+            padding: 20px;
+            background-color: rgba(20, 20, 20, 0.9);
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0px 0px 15px rgba(9, 9, 9, 0.5);
+            position: relative;
+        }
+        .welcome-container h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #b22222;
+            font-family: 'Cinzel Decorative', 'Uncial Antiqua', serif;
+            text-shadow: 2px 2px 5px rgba(178, 34, 34, 0.7);
+        }
+        .welcome-container p {
+            font-size: 1.2rem;
+            padding: 15px;
+            background: url('old-parchment.jpg') no-repeat center center;
+            background-size: cover;
+            color: #530d0d;
+            font-style: italic;
+            border: 2px solid #766d6d;
+            border-radius: 8px;
+            display: inline-block;
+            max-width: 500px;
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+        .start-btn {
+            border: 2px solid transparent;
+            padding: 0;
+            width: 70px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #b22222;
+            transition: 0.3s;
+            box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
+            position: relative;
+        }
+        .start-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .start-btn:hover {
+            border-color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(255, 253, 255, 0.6);
+        }
+        .start-btn:active {
+            transform: scale(0.95);
+            border-color: #ececec;
+        }
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            height: auto;
+        }
+        .carousel-container {
+            position: relative;
+            width: 200px; /* Adjust based on image size */
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.8s ease-in-out;
+            width: calc(200px * 8); /* Adjust based on number of images */
+        }
+
+        .carousel img {
+            width: 200px;
+            height: auto;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .carousel img.active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .prev { left: 0; }
+        .next { right: 0; }
+        
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #b22222;
+            box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #music-toggle:hover {
+            border-color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 0 8px rgba(255, 253, 255, 0.6);
+        }
+        .transition-out {
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="transition-overlay"></div>
+    <div class="content-wrapper">
+        <div class="carousel-container">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="carousel" id="carousel">
+                <img src="KleinM.jpg" alt="Klein M">
+                <img src="Klein.jpg" alt="Klein">
+                <img src="sherlock.jpg" alt="Sherlock Moriarty">
+                <img src="gehrman.jpg" alt="Gehrman Sparrow">
+                <img src="dwayne.jpg" alt="Dwayne Dantès">
+                <img src="merlin.jpg" alt="Merlin Hermes">
+                <img src="thefool.jpg" alt="The Fool">
+                <img src="halffool.jpg" alt="Half Fool">     
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        <div class="welcome-container">
+            <h1>Lord of the Mysteries <br>
+                The Fool Klein</h1>
+            <p>“The Fool that doesn’t belong to this era;<br>
+                The Mysterious Ruler above the Gray Fog;<br>
+                The King of Yellow and Black who wields good luck.”</p>
+            <p>Are you ready to meet The Fool?</p>
+            <p>Ask The Fool anything you want to know.</p>
+            <div style="display: flex; justify-content: center; margin-top: 10px;">
+                <button class="start-btn" onclick="startChat()">
+                    <img src="emblem.png" alt="Start">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button id="music-toggle"> 🎵 </button>
+
+    <script src="music.js"></script>
+    <script>
+        function startChat() {
+            const contentWrapper = document.querySelector(".content-wrapper"); // Selects the main content
+            contentWrapper.classList.add("transition-out"); // Apply fade/slide animation
+                
+            setTimeout(() => {
+                window.location.href = "index.html"; // Redirect after animation
+                }, 800); // Match CSS transition time
+            }
+        let index = 0;
+            const slides = document.querySelectorAll('.carousel img');
+            const totalSlides = slides.length;
+            const carousel = document.getElementById('carousel');
+
+            function moveSlide(direction) {
+                index = (index + direction + totalSlides) % totalSlides;
+                carousel.style.transform = `translateX(${-index * 200}px)`;
+            }
+
+            // Auto-slide every 3 seconds
+            setInterval(() => moveSlide(1), 3000);
+
+            // Ensure correct starting position
+            document.addEventListener("DOMContentLoaded", () => {
+                carousel.style.transform = `translateX(0px)`;
+            });
+            
+
+    </script>
+    
+</body>
+</html>

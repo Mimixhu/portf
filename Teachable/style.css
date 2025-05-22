@@ -1,0 +1,86 @@
+/* General page styling */
+body {
+  background-color: #f8e7e7; /* Light pink background */
+  font-family: Arial, sans-serif;
+}
+
+/* Main container */
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+/* Left Panel (Title and Buttons) */
+.left-panel {
+  width: 300px;
+  text-align: center;
+  margin-right: 30px;
+}
+
+/* Right Panel (Webcam and Labels) */
+.right-panel {
+  text-align: center;
+}
+
+/* Webcam Container */
+#webcam-container canvas {
+  border: 3px solid #b66e6e; /* Border around the webcam */
+  border-radius: 10px;
+}
+
+/* Label Container */
+#label-container {
+  margin-top: 20px;
+}
+
+/* Label Item */
+.label-item {
+  margin: 10px 0;
+}
+
+/* Label Text */
+.label-text {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 20px;
+}
+
+/* Progress Indicator */
+.progress {
+  height: 100%;
+  background-color: #bd6c6c;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Buttons */
+button {
+  background-color: #b66e6e;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #b95757;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

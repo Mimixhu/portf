@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fool</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.onload = function() {
+            if (performance.navigation.type === 1) { // Detects if the page was refreshed
+                localStorage.removeItem("visited");
+                window.location.href = "welcome.html";
+            } else {
+                localStorage.setItem("visited", "true");
+            }
+        };
+    </script>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Chatbot Container (Initially Hidden) -->
+    <div id="chatbot-container" class="chatbot-cont hidden transition-in">
+
+    <div id="chatbot-container" class="chatbot-cont hidden">
+        <div class="chat-cont"></div></div>
+        <div class="quick-questions">
+        </div>
+        <div class="quick-questions-text">You may start...</div>
+    
+        <div class="typing-cont">
+            <div class="typing-textarea">
+                <textarea id="chat-input" spellcheck="false" placeholder="Ask The Fool" required></textarea>
+                <button id="send-btn">
+                    <img src="emblem.png" alt="Send" width="50" height="50">
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button id="music-toggle">🎵 </button>
+
+
+    <script src="music.js"></script>
+    <script type="module" src="mainmodule.js"></script>
+    <script type="module" src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                const chatbot = document.getElementById("chatbot-container");
+                chatbot.classList.add("active");
+                chatbot.style.minHeight = "600px"; // Ensures space is already set
+            }, 200); // Small delay for smooth effect
+        });
+    </script>
+    
+    
+    
+</body>
+</html>

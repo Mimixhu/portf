@@ -1,0 +1,302 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('thumb.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.chatbot-cont {
+    width: 800px;
+    max-width: 95%;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    visibility: visible;
+}
+.chat-bubble {
+    white-space: normal; /* Allows natural wrapping */
+    word-wrap: break-word; /* Ensures long words wrap */
+    overflow-wrap: break-word; 
+    max-width: 80%; /* Adjust width for better readability */
+    padding: 12px 18px; /* Ensures padding is balanced */
+    border-radius: 20px; /* Makes bubbles look smoother */
+    line-height: 1.5; /* Improves readability */
+}
+
+
+/* Ensure space is always reserved for the scrollbar */
+.chat-cont {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 500px;
+    scroll-behavior: smooth;
+    min-height: 100px; /* Prevents layout shift */
+}
+
+.chat-content {
+    justify-content: flex-end;
+}
+
+.gemini-response .chat-body-inner {
+    background-color: #493131; /* Change this to any desired color */
+    color: white; /* Ensure text remains readable */
+    border-radius: 20px;
+    padding: 14px 20px;
+    font-size: 16px;
+    position: relative;
+}
+
+
+/* Adjust avatars accordingly */
+.chat-content .avatar {
+    order: 1;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.gemini-response .avatar {
+    order: -1;
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+.chat-content, .gemini-response {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.chat-body-inner {
+    max-width: 80%;
+    padding: 14px 20px;
+    border-radius: 20px;
+    background-color: #bfabab;
+    color: black;
+    font-size: 16px;
+    position: relative;
+}
+
+.typing-cont {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    background-color: rgba(37, 3, 3, 0.9);
+    display: flex;
+    align-items: center;
+}
+
+.typing-textarea {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px; /* Ensures space between input and button */
+}
+
+textarea#chat-input {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    height: 50px;
+    overflow-y: auto;
+    background-color: #444;
+    color: white;
+    font-size: 16px;
+}
+
+textarea#chat-input:focus {
+    outline: 2px solid #000000;
+    border-color: #000000;
+}
+
+/* ✅ Send Button with Perfect Border Fit */
+button#send-btn {
+    border: 2px solid transparent; /* Remove contrast issues */
+    padding: 0; 
+    width: 70px; 
+    height: 60px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px; 
+    overflow: hidden; /* Ensures the border follows image dimensions */
+}
+
+button#send-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Keeps image proportions */
+    border-radius: 8px;
+}
+
+
+/* ✅ Hover Effect */
+button#send-btn:hover {
+    border-color: #ffffff; /* Slightly lighter purple */
+    transform: scale(1.1); /* Slightly enlarges */
+    box-shadow: 0 0 8px rgba(255, 253, 255, 0.6); /* Glowing effect */
+}
+
+/* ✅ Click Effect */
+button#send-btn:active {
+    transform: scale(0.95); /* Press effect */
+    border-color: #ececec; /* Darker border */
+}
+
+
+/* User avatars */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-content .avatar {
+    margin-right: 10px;
+}
+
+.gemini-response .avatar {
+    margin-right: 10px;
+}
+
+/* Quick Questions Section */
+.quick-questions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Creates even columns */
+    gap: 10px; /* Space between items */
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 900px; /* Limits width for better centering */
+    margin: 0 auto; /* Centers the container */
+}
+
+
+.quick-questions-text {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 25px;
+    font-style: italic;
+    pointer-events: none;
+}
+
+.quick-questions-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+    gap: 10px; /* Adds spacing between boxes */
+    justify-content: center;
+    align-items: start;
+    max-width: 800px; /* Adjust width if needed */
+    margin: 0 auto; /* Centers the container */
+}
+
+.quick-question {
+    background: url('old-parchment.jpg') no-repeat center center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(10, 10, 10);
+    border-radius: 15px; /* Adjust this value for more or less rounding */
+    width: 250px; /* Ensures all boxes have the same width */
+    height: 70px; /* Ensures all boxes have the same height */
+    display: flex;
+    align-items: center; /* Centers text vertically */
+    justify-content: center; /* Centers text horizontally */
+    text-align: center;
+    padding: 10px; /* Keeps spacing consistent */
+    white-space: normal; /* Allows text wrapping */
+    word-wrap: break-word; /* Prevents text overflow */
+    flex-shrink: 0; /* Prevents boxes from shrinking */
+}
+
+.quick-question:hover {
+    background-color: #666;
+    transform: scale(1.05);
+}
+
+.quick-question:active {
+    background-color: #888;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .quick-questions {
+        grid-template-columns: 1fr; /* Stacks items vertically */
+    }
+}
+
+
+/* Ancient-style scrollbar */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: url('old-parchment.jpg') no-repeat center center;
+    background-size: cover;
+    border-left: 1px solid #5a3e36;
+    border-right: 1px solid #5a3e36;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #5a3e36;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7a5e4f;
+}
+
+#music-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #b22222;
+    box-shadow: 0px 4px 10px rgba(178, 34, 34, 0.5);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#music-toggle:hover {
+    border-color: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 0 8px rgba(255, 253, 255, 0.6);
+}
+strong {
+    font-weight: bold !important; /* Ensure it's applied */
+}
+
+em {
+    font-style: italic !important;
+}
+.transition-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    visibility: hidden; /* Prevents it from flashing immediately */
+}
+
+.transition-in.active {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible; /* Makes it visible smoothly */
+}

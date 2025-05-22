@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Project Portfolio</title>
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #1f1c2c, #928dab);
+      --primary: #ffffff;
+      --accent: #6c5ce7;
+      --hover: #a29bfe;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--primary);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #ddd;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 50px 0 30px;
+      letter-spacing: 1px;
+    }
+
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .project-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 30px 20px;
+      width: 100%;
+      max-width: 300px;
+      border-radius: 15px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .project-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    .project-card a {
+      display: inline-block;
+      padding: 10px 20px;
+      color: var(--primary);
+      background-color: var(--accent);
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .project-card a:hover {
+      background-color: var(--hover);
+    }
+
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 2.2rem;
+      }
+
+      .header p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+
+      .project-card {
+        padding: 20px 15px;
+      }
+
+      .project-card a {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Mielle Angelie B. Dulce</h1>
+      <p>
+        I'm a passionate developer/designer/creator who enjoys building innovative projects.
+      </p>
+    </div>
+
+    <div class="section-title">My Projects</div>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <h2>Project 1 - Teachable Machine Image Model</h2>
+        <p>A short description of what this project does or solves.</p>
+        <a href="../Teachable/my-model/image.html">Open</a>
+      </div>
+      <div class="project-card">
+        <h2>Project 2 - ChatBot</h2>
+        <p>A short description of what this project does or solves.</p>
+        <a href="index.html">Open</a>
+      </div>
+      <div class="project-card">
+        <h2>Project 3 - Sentiment Analysis</h2>
+        <p>A short description of what this project does or solves.</p>
+        <a href="project3.html">Open</a>
+      </div>
+      <div class="project-card">
+        <h2>Project 4</h2>
+        <p>A short description of what this project does or solves.</p>
+        <a href="project4.html">Open</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
